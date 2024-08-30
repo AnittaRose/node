@@ -43,7 +43,15 @@ const server = http.createServer((req, res)=>{
     }else if(parsed_url.pathname === '/anitta'){
         res.writeHead(299,{'Content-Type':'text/json'});
         res.end(fs.readFileSync('../server/datas.json'))
-    }else if(parsed_url.pathname === '/submit' && req.method === 'POST'){
+    }else if(parsed_url.pathname === '/adduser.html'){
+        res.writeHead(200,{'Content-Type':'text/html'});
+        res.end(fs.readFileSync('../client/adduser.html'));
+
+    }else if(parsed_url.pathname === '/add.js'){
+        res.writeHead(200,{'Content_Type' : 'text/javascript'})
+        res.end(fs.readFileSync('../client/add.js'));
+    }
+    else if(parsed_url.pathname === '/submit' && req.method === 'POST'){
         console.log("Reached here.....");
 
         let body = '';
