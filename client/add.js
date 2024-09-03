@@ -11,20 +11,33 @@ async function adduser(event){
     let password = document.getElementById('password').value;
     console.log('passowrd: ',password)
 
+    //validation
+    let nameRegex =/^[a-zA-Z0-9]+([._]?[a-zA-Z]+)*$/;
     let nameerror = document.getElementById('name-error')
     if(!name){
         
-        nameerror.innerHTML = 'invalid name'
+        nameerror.innerHTML = 'name is required'
+    }else if(!nameRegex.test(name)){
+        nameerror.innerHTML = "invalid name"
     }
+    let emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z]+\.[a-zA-Z]{3,}$/;
+    //anittanelson40@gmail.com
+
 
     let emailerror =document.getElementById('email-error')
     if(!email){
-        emailerror.innerHTML = 'invalid email'
+        emailerror.innerHTML = ' email is required'
+    }else if(!emailRegex.test(email)){
+        emailerror.innerHTML = "Invalid email";
     }
 
+
+    let passwordRegexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     let passworderror = document.getElementById('password-error')
     if(!password){
-        passworderror.innerHTML = 'invalid password'
+        passworderror.innerHTML = 'password is required'
+    }else if(!passwordRegexp.test(password)){
+        passworderror.innerHTML = "Invalid password"
     }
 
     let data =  {

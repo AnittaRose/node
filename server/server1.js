@@ -2,7 +2,7 @@ const http = require('http');
 const port = 3000;
 const url = require('url');
 const fs = require('fs');
-const queryString = require('querystring')
+// const queryString = require('querystring')
 const {MongoClient} = require('mongodb');
 const Client = new MongoClient('mongodb://localhost:27017');
 
@@ -64,7 +64,7 @@ const server = http.createServer((req, res)=>{
         req.on('end' , ()=>{
             console.log("body : ", body);
 
-            let datas = queryString.parse(body);
+            let datas = JSON.parse(body);
             console.log("datas : ", datas);
 
             console.log("name : ", datas.name);
