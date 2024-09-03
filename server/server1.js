@@ -18,7 +18,7 @@ async function connect(){
 }
 connect();
 
-const server = http.createServer((req, res)=>{
+const server = http.createServer(async(req, res)=>{
     let db= Client.db("dms");
     let collection=db.collection("users");
     const req_url = req.url;
@@ -88,7 +88,24 @@ const server = http.createServer((req, res)=>{
             })
         })
       
+    }else if(parsed_url.pathname === '/submit' && req.method === 'GET'){
+
+        let UserDatas = await collection.find().toArray();
+        console.log("UserDatas : ",UserDatas)
+
+        let json_Datas=JSON.stringify(UserDatas);
+        console.log("json_Datas : ",json_Datas);
+
+        res.writeHead(200,{'Content_Type': "text/json"});
+        res.end(json_Datas);
     }
+    // }else if(parsed_url.pathname === '/submit' && req.method === 'GET'){
+    //     let body;
+    //     req.on('data',("chunk ",chunk)=>{
+    //         console.log("chunk :",chunk);
+    //         body=chunk.toString
+    //     });
+    // }
 
 })
 server.listen(port, () =>{
